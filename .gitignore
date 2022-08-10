@@ -1,0 +1,5 @@
+venv/
+sqlite_database.py
+.idea
+__pycache__/
+*.pyc
