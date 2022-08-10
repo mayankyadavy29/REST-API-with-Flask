@@ -1,5 +1,5 @@
 flask
-flask_restful
-flask_sqlalchemy
-flask_jwt
+flask-restful
+flask-sqlalchemy
+flask-jwt
 uwsgi
