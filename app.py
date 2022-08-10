@@ -17,9 +17,6 @@ app.secret_key = "Mayank"
 api = Api(app)
 jwt = JWT(app, authenticate, identity)  # create /auth resource by default
 
-@app.before_request
-def before_request():
-    db.create_all()
 
 api.add_resource(Item, "/item/<string:name>")
 api.add_resource(ItemList, "/items")
