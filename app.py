@@ -12,7 +12,15 @@ import os
 
 app = Flask(__name__)
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)   # config JWT to expire within half an hour
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///data.db")
+
+#### this is done because sqlalchemy doesn't support postgres://username:password@hostname.com, rather it supports
+### postgresql://username:password@hostname.com
+uri = os.environ.get("DATABASE_URL", "sqlite:///data.db")
+if uri.startswith("postgres://"):
+    uri = uri.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = uri
+### Finished setting up  DATABASE_URL to connect with postgres in heroku
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.secret_key = "Mayank"
 api = Api(app)
